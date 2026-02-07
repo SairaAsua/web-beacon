@@ -168,29 +168,29 @@ const HeroSection = ({ skipToBeacon = false }) => {
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 className="flex flex-col items-center justify-center"
               >
+                {/* Harmonic Supertitle */}
+                <motion.h2
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  className={`text-xl md:text-2xl lg:text-3xl font-light tracking-[0.5em] uppercase mb-4 ${isSunMode ? 'text-gray-600' : 'text-white/80'
+                    }`}
+                >
+                  Harmonic
+                </motion.h2>
+
                 {/* Beacon Brand Name */}
                 <BioluminescentGlow intensity="strong">
                   <motion.h1
                     initial={{ opacity: 0, scale: 0.9, filter: 'blur(12px)' }}
                     animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
-                    className={`text-6xl md:text-8xl lg:text-9xl font-light tracking-widest mb-4 ${isSunMode ? 'text-gray-800' : 'text-white'
+                    className={`text-6xl md:text-8xl lg:text-9xl font-light tracking-widest mb-12 ${isSunMode ? 'text-gray-800' : 'text-white'
                       }`}
                   >
                     Beacon
                   </motion.h1>
                 </BioluminescentGlow>
-
-                {/* Tagline */}
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  className={`text-sm md:text-lg font-light mb-12 tracking-[0.2em] uppercase ${isSunMode ? 'text-iridescent-violet' : 'text-iridescent-teal'
-                    }`}
-                >
-                  Harmonic Resonance Wellness
-                </motion.p>
 
                 {/* Download CTAs */}
                 <motion.div
