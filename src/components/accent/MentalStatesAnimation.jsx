@@ -10,7 +10,9 @@ const MentalStatesAnimation = ({ onComplete }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Get prefix and states based on current mode
-  const prefix = content.mentalStates?.prefix || "you don't have";
+  const isSunMode = mode === 'sun';
+  const prefix = isSunMode ? null : (content.mentalStates?.prefix || "you don't have");
+
   const states = content.mentalStates?.[mode] || content.mentalStates?.moon || [
     'anxiety',
     'depression',
@@ -42,14 +44,14 @@ const MentalStatesAnimation = ({ onComplete }) => {
     return () => clearTimeout(timer);
   }, [currentIndex, states.length, onComplete]);
 
-  const isSunMode = mode === 'sun';
-
   return (
     <div className="relative h-64 md:h-80 w-full flex flex-col items-center justify-center overflow-hidden px-4">
       {/* Fixed prefix title */}
-      <h2 className={`text-2xl md:text-3xl lg:text-4xl font-light tracking-wider lowercase mb-4 ${isSunMode ? 'text-gray-600' : 'text-white/70'}`}>
-        {prefix}
-      </h2>
+      {prefix && (
+        <h2 className={`text-2xl md:text-3xl lg:text-4xl font-light tracking-wider lowercase mb-4 ${isSunMode ? 'text-gray-600' : 'text-white/70'}`}>
+          {prefix}
+        </h2>
+      )}
 
       {/* Animated words */}
       <div className="relative h-20 md:h-24 w-full flex items-center justify-center">

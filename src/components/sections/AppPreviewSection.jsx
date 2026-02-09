@@ -35,8 +35,8 @@ const AppPreviewSection = () => {
 
     return (
         <section className={`relative py-24 px-6 overflow-hidden transition-colors duration-1000 ${isSunMode
-                ? 'bg-gradient-to-b from-amber-50 via-white to-amber-50'
-                : 'bg-gradient-to-b from-slate-900 via-violet-950/50 to-slate-900'
+            ? 'bg-gradient-to-b from-amber-50 via-white to-amber-50'
+            : 'bg-gradient-to-b from-slate-900 via-violet-950/50 to-slate-900'
             }`}>
             {/* Background decoration */}
             <div className="absolute inset-0 overflow-hidden">
@@ -75,12 +75,12 @@ const AppPreviewSection = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 className={`flex items-center gap-2 px-4 md:px-6 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${isActive
-                                        ? isSunMode
-                                            ? 'bg-gray-800 text-white shadow-lg'
-                                            : 'bg-violet-500 text-white shadow-lg shadow-violet-500/30'
-                                        : isSunMode
-                                            ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                                            : 'bg-white/10 text-white/70 hover:bg-white/20'
+                                    ? isSunMode
+                                        ? 'bg-gray-800 text-white shadow-lg'
+                                        : 'bg-violet-500 text-white shadow-lg shadow-violet-500/30'
+                                    : isSunMode
+                                        ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                        : 'bg-white/10 text-white/70 hover:bg-white/20'
                                     }`}
                             >
                                 <Icon className="w-4 h-4 md:w-5 md:h-5" />
@@ -123,8 +123,8 @@ const AppPreviewSection = () => {
                                     />
                                     {/* Glassmorphism overlay */}
                                     <div className={`absolute inset-0 rounded-3xl ${isSunMode
-                                            ? 'bg-gradient-to-t from-white/20 to-transparent'
-                                            : 'bg-gradient-to-t from-violet-900/20 to-transparent'
+                                        ? 'bg-gradient-to-t from-white/20 to-transparent'
+                                        : 'bg-gradient-to-t from-violet-900/20 to-transparent'
                                         }`} />
                                 </div>
                             </motion.div>
@@ -182,6 +182,59 @@ const AppPreviewSection = () => {
                                         </motion.li>
                                     ))}
                                 </ul>
+
+                                {/* Expanded Meditation Details */}
+                                {features[activeTab].id === 'meditations' && features[activeTab].categories && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.3 }}
+                                        className="mt-8 space-y-6"
+                                    >
+                                        <div>
+                                            <h4 className={`text-sm font-medium uppercase tracking-wider mb-3 ${isSunMode ? 'text-gray-500' : 'text-white/50'}`}>
+                                                {features[activeTab].sessionType}
+                                            </h4>
+                                            <div className="flex flex-wrap gap-2">
+                                                {features[activeTab].categories.map((cat, i) => (
+                                                    <span key={i} className={`text-xs px-3 py-1 rounded-full border ${isSunMode
+                                                            ? 'border-gray-300 text-gray-600 bg-white/50'
+                                                            : 'border-white/10 text-white/70 bg-white/5'
+                                                        }`}>
+                                                        {cat}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <h4 className={`text-sm font-medium uppercase tracking-wider mb-2 ${isSunMode ? 'text-gray-500' : 'text-white/50'}`}>
+                                                    Durations
+                                                </h4>
+                                                <div className="space-y-1">
+                                                    {features[activeTab].durations.map((dur, i) => (
+                                                        <div key={i} className={`text-sm ${isSunMode ? 'text-gray-700' : 'text-white/80'}`}>
+                                                            {dur}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 className={`text-sm font-medium uppercase tracking-wider mb-2 ${isSunMode ? 'text-gray-500' : 'text-white/50'}`}>
+                                                    Languages
+                                                </h4>
+                                                <div className="flex gap-2">
+                                                    {features[activeTab].languages.map((lang, i) => (
+                                                        <span key={i} className={`text-sm ${isSunMode ? 'text-gray-700' : 'text-white/80'}`}>
+                                                            {lang}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                )}
                             </motion.div>
                         </AnimatePresence>
                     </motion.div>

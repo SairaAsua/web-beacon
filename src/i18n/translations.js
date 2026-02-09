@@ -95,6 +95,16 @@ export const translations = {
             "Sessions in Spanish and English",
             "Layered over live beacon stream",
             "Curated for different intentions"
+          ],
+          sessionType: "Live Harmonic Resonance Guided Sessions",
+          categories: [
+            "All", "Calm", "Sleep", "Focus", "Energizing", "Love", "Breathwork", "Body Scan", "Visualization"
+          ],
+          durations: [
+            "Quick (< 5 min)", "Medium (5-15 min)", "Long (> 15 min)"
+          ],
+          languages: [
+            "English", "Spanish"
           ]
         },
         audioMix: {
@@ -205,6 +215,16 @@ export const translations = {
             "Sesiones en español e inglés",
             "Superpuestas sobre el stream en vivo",
             "Curadas para diferentes intenciones"
+          ],
+          sessionType: "Sesiones guiadas sobre la resonancia armónica en vivo",
+          categories: [
+            "Todas", "Calma", "Sueño", "Enfoque", "Energizante", "Amor", "Respiración", "Escaneo Corporal", "Visualización"
+          ],
+          durations: [
+            "Rápida (< 5 min)", "Media (5-15 min)", "Larga (> 15 min)"
+          ],
+          languages: [
+            "Inglés", "Español"
           ]
         },
         audioMix: {
