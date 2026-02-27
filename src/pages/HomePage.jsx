@@ -2,19 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeroSection from '@/components/sections/HeroSection';
+import TheoryContentSection from '@/components/sections/TheoryContentSection';
+import ExperienceSection from '@/components/sections/ExperienceSection';
+import AnalysisSection from '@/components/sections/AnalysisSection';
 import AppPreviewSection from '@/components/sections/AppPreviewSection';
+import FooterCTA from '@/components/sections/FooterCTA';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import ModeSwitcher from '@/components/ModeSwitcher';
 import { Toaster } from '@/components/ui/toaster';
-import { useMode } from '@/context/ModeContext';
 import { useLanguage } from '@/context/LanguageContext';
 
 const HomePage = () => {
-  const { mode } = useMode();
   const { content } = useLanguage();
-  const isSunMode = mode === 'sun';
-  const isStarMode = mode === 'star';
-  const [breathingPhase, setBreathingPhase] = useState('done'); // 'inhala' | 'exhala' | 'done'
+  const [breathingPhase, setBreathingPhase] = useState('inhala'); // 'inhala' | 'exhala' | 'done'
 
   // Get translated breathing text
   const getBreathingText = (phase) => {
@@ -22,63 +21,49 @@ const HomePage = () => {
     return content.hero?.breathing?.[phase] || phase;
   };
 
-  // Reset and start breathing sequence when entering star mode
+  // Breathing sequence on page load
   useEffect(() => {
-    if (isStarMode) {
-      setBreathingPhase('inhala');
+    setBreathingPhase('inhala');
 
-      // After 3s show exhala (matching animation duration)
-      const timer1 = setTimeout(() => {
-        setBreathingPhase('exhala');
-      }, 3000);
+    const timer1 = setTimeout(() => {
+      setBreathingPhase('exhala');
+    }, 3000);
 
-      // After 6s total, show hero content
-      const timer2 = setTimeout(() => {
-        setBreathingPhase('done');
-      }, 6000);
+    const timer2 = setTimeout(() => {
+      setBreathingPhase('done');
+    }, 6000);
 
-      return () => {
-        clearTimeout(timer1);
-        clearTimeout(timer2);
-      };
-    }
-  }, [isStarMode]);
-
-  const getBackgroundClass = () => {
-    if (isStarMode) return 'bg-gradient-to-br from-slate-900 via-violet-950 to-fuchsia-950';
-    if (isSunMode) return 'bg-pearly-cream';
-    return 'bg-gray-900';
-  };
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
 
   return (
-    <div className={`relative min-h-screen transition-colors duration-1000 ${getBackgroundClass()}`}>
+    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-violet-950 to-fuchsia-950">
       {/* Floating Header */}
       <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
         <a
           href="https://beacon.altermundi.net"
           target="_blank"
           rel="noopener noreferrer"
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${isSunMode
-            ? 'bg-amber-500/20 text-amber-800 hover:bg-amber-500/30 border border-amber-500/30'
-            : 'bg-violet-500/20 text-violet-200 hover:bg-violet-500/30 border border-violet-500/30'
-            }`}
+          className="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-violet-500/20 text-violet-200 hover:bg-violet-500/30 border border-violet-500/30"
         >
           {content.login || 'Login'}
         </a>
-        <ModeSwitcher />
         <LanguageSwitcher />
       </div>
 
-      {/* Star mode: Breathing animation overlay */}
+      {/* Breathing animation overlay */}
       <AnimatePresence mode="wait">
-        {isStarMode && breathingPhase !== 'done' && (
+        {breathingPhase !== 'done' && (
           <motion.div
             key={breathingPhase}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 flex items-center justify-center"
+            className="fixed inset-0 z-40 flex items-center justify-center bg-gradient-to-br from-slate-900 via-violet-950 to-fuchsia-950"
           >
             {/* Outer breathing ring */}
             <motion.div
@@ -144,7 +129,7 @@ const HomePage = () => {
               {getBreathingText(breathingPhase)}
             </motion.p>
 
-            {/* Floating particles that follow the breath */}
+            {/* Floating particles */}
             {[...Array(8)].map((_, i) => {
               const angle = (i / 8) * Math.PI * 2;
               const baseX = Math.cos(angle) * 120;
@@ -179,15 +164,19 @@ const HomePage = () => {
         )}
       </AnimatePresence>
 
-      {/* Hero content - show after breathing for star mode, or always for other modes */}
-      {(!isStarMode || breathingPhase === 'done') && (
+      {/* Main content - visible after breathing */}
+      {breathingPhase === 'done' && (
         <>
-          <HeroSection skipToBeacon={isStarMode} />
+          <HeroSection />
+          <TheoryContentSection />
+          <ExperienceSection />
+          <AnalysisSection />
           <AppPreviewSection />
+          <FooterCTA />
         </>
       )}
 
-      {/* Toast notifications for download buttons */}
+      {/* Toast notifications */}
       <Toaster />
     </div>
   );
