@@ -50,16 +50,13 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        pearly: {
-          white: '#F5F3F0',
-          cream: '#FAF8F5',
-          silver: '#E8E6E3',
-        },
-        nacre: {
-          light: '#FFF9F5',
-          medium: '#F0E8E0',
-          dark: '#D8CFC5',
-        },
+        // ── Ambient Violet design system ──────────────────────────
+        'ghost-violet': '#FCFAFF',      // Primary background
+        'nightshade': '#1A1423',      // Primary text
+        'dusty-amethyst': '#7D6A8D',    // Accents, CTAs, icons
+        'faded-lavender': '#E6DFED',    // Borders, dividers
+        'mist': '#F3EFF9',      // Alternate section bg
+        // ── Legacy iridescent tokens (kept for compat) ────────────
         iridescent: {
           violet: '#9D4EDD',
           teal: '#00D9FF',
@@ -68,6 +65,12 @@ module.exports = {
           lavender: '#C77DFF',
           cyan: '#48CAE4',
         },
+      },
+      fontFamily: {
+        display: ['Space Grotesk', 'Inter', 'sans-serif'],
+        body: ['Newsreader', 'Lora', 'Georgia', 'serif'],
+        sans: ['Space Grotesk', 'Inter', 'sans-serif'],
+        serif: ['Newsreader', 'Lora', 'Georgia', 'serif'],
       },
       backgroundImage: {
         'iridescent-gradient': 'linear-gradient(135deg, #9D4EDD 0%, #00D9FF 33%, #00F5FF 66%, #FFD700 100%)',

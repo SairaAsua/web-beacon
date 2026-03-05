@@ -82,9 +82,9 @@ export const translations = {
         live: {
           title: "Live Stream",
           badge: "24/7 Live",
-          description: "Connect to our continuous broadcast of natural harmonics. A living composition that unfolds in real-time, tuned to frequencies that resonate with your natural state.",
+          description: "Connect to our continuous broadcast of natural harmonics. A living composition that unfolds in real-time.",
           highlights: [
-            "Continuous 24/7 harmonic transmission",
+            "Continuous 24/7 audio transmission",
             "Real-time connection with other listeners",
             "Adaptive audio quality"
           ]
@@ -92,7 +92,7 @@ export const translations = {
         meditations: {
           title: "Guided Sessions",
           badge: "Meditations",
-          description: "Explore our collection of guided meditations designed to work in harmony with the beacon signal. Each session combines voice guidance with live harmonic resonance.",
+          description: "Explore our collection of curated audio overlays. Each session combines voice guidance with live harmonic resonance.",
           highlights: [
             "Sessions in Spanish and English",
             "Layered over live beacon stream",

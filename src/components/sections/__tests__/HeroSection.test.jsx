@@ -2,6 +2,11 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '../../../test-utils';
 import HeroSection from '../HeroSection';
 
+// Mock HarmonicVisualization (canvas not available in JSDOM)
+vi.mock('../../accent/HarmonicVisualization', () => ({
+    default: () => <canvas data-testid="harmonic-viz" />,
+}));
+
 // Mock framer-motion to avoid animation issues in tests
 vi.mock('framer-motion', async (importOriginal) => {
     const actual = await importOriginal();
@@ -35,8 +40,12 @@ describe('HeroSection', () => {
 
     it('renders subheading text', () => {
         render(<HeroSection />);
-        // The subheading should contain some text from translations
         const subheading = screen.getByText(/interference pattern/i);
         expect(subheading).toBeInTheDocument();
+    });
+
+    it('renders harmonic visualization', () => {
+        render(<HeroSection />);
+        expect(screen.getByTestId('harmonic-viz')).toBeInTheDocument();
     });
 });
