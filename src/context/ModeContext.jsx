@@ -1,32 +1,11 @@
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 
 const ModeContext = createContext();
 
 export const ModeProvider = ({ children }) => {
-    const [mode, setModeState] = useState('moon'); // 'moon' | 'sun' | 'star'
-
-    useEffect(() => {
-        const savedMode = localStorage.getItem('beacon-mode');
-        if (savedMode && ['moon', 'sun', 'star'].includes(savedMode)) {
-            setModeState(savedMode);
-        }
-    }, []);
-
-    const setMode = (newMode) => {
-        setModeState(newMode);
-        localStorage.setItem('beacon-mode', newMode);
-    };
-
-    const toggleMode = () => {
-        const modes = ['moon', 'sun', 'star'];
-        const currentIndex = modes.indexOf(mode);
-        const nextIndex = (currentIndex + 1) % modes.length;
-        setMode(modes[nextIndex]);
-    };
-
     return (
-        <ModeContext.Provider value={{ mode, setMode, toggleMode }}>
+        <ModeContext.Provider value={{ mode: 'star' }}>
             {children}
         </ModeContext.Provider>
     );
